@@ -1,0 +1,26 @@
+
+const int buzzer = A1; 
+ int threshold = 400; 
+int sensorReading = 0;
+void setup() {
+pinMode(buzzer,INPUT);
+}
+void loop() {
+sensorReading = analogRead(knockSensor);
+ {
+pinMode(buzzer,OUTPUT);
+tone(buzzer,261);
+delay(200);
+noTone(buzzer);
+delay(200);
+noTone(buzzer);
+delay(200);
+noTone(buzzer);
+delay(200);
+noTone(buzzer);
+delay(200);
+noTone(buzzer);
+
+}
+delay(100);
+}

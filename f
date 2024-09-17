@@ -1,7 +1,7 @@
 export REGION=${ZONE::-2}
 gcloud config set compute/region $REGION
 gcloud config set compute/zone $ZONE
-  gcloud compute instances create www1 \
+  gcloud compute instances create web1 \
     --zone=$ZONE \
     --tags=network-lb-tag \
     --machine-type=e2-small \
@@ -13,7 +13,7 @@ gcloud config set compute/zone $ZONE
       service apache2 restart
       echo "
 <h3>Web Server: www1</h3>" | tee /var/www/html/index.html'
-  gcloud compute instances create www2 \
+  gcloud compute instances create web2 \
     --zone=$ZONE \
     --tags=network-lb-tag \
     --machine-type=e2-small \
@@ -25,7 +25,7 @@ gcloud config set compute/zone $ZONE
       service apache2 restart
       echo "
 <h3>Web Server: www2</h3>" | tee /var/www/html/index.html'
-  gcloud compute instances create www3 \
+  gcloud compute instances create web3 \
     --zone=$ZONE  \
     --tags=network-lb-tag \
     --machine-type=e2-small \
@@ -46,7 +46,7 @@ gcloud compute http-health-checks create basic-check
   gcloud compute target-pools create www-pool \
     --region $REGION --http-health-check basic-check
 gcloud compute target-pools add-instances www-pool \
-    --instances www1,www2,www3
+    --instances web1,web2,web3
 gcloud compute forwarding-rules create www-rule \
     --region  $REGION \
     --ports 80 \
